@@ -22,17 +22,17 @@ export default function TrafficLight() {
     green: {
       color: "green",
       duration: 3000,
-      next: "red",
+      next: "yellow",
     },
     yellow: {
       color: "yellow",
       duration: 500,
-      next: "green",
+      next: "red",
     },
     red: {
       color: "red",
       duration: 4000,
-      next: "yellow",
+      next: "green",
     },
   };
 
