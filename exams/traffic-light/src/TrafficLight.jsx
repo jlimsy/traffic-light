@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 
 export default function TrafficLight() {
-  const [red, setRed] = useState(false);
-  const [green, setGreen] = useState(false);
-  const [yellow, setYellow] = useState(false);
+  // set initial state of green to true
+  // const [green, setGreen] = useState(true);
+  // const [red, setRed] = useState(false);
+  // const [yellow, setYellow] = useState(false);
   const [color, setColor] = useState("green");
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setGreen(color === "green");
-      setYellow(color === "yellow");
-      setRed(color === "red");
-
       setColor(lights[color].next);
+      console.log(color);
     }, lights[color].duration);
+
+    // setGreen(color === "green");
+    // setYellow(color === "yellow");
+    // setRed(color === "red");
 
     return () => clearTimeout(timer);
   }, [color]); // Re-run effect when currentColor changes
@@ -38,14 +40,16 @@ export default function TrafficLight() {
 
   return (
     <div className="py-12 px-6 flex flex-col items-center justify-center space-y-5 bg-gray ">
-      {/* {Object.keys(lights).map((light, idx) => (
+      {Object.keys(lights).map((light, idx) => (
         <div
           key={idx}
-          className={`w-24 h-24 bg-${light.color === color && light[color].color} rounded-full`}
-        ></div>
-      ))} */}
+          className={`w-24 h-24 bg-${lights[light].color === color ? lights[light].color : "inactive"} rounded-full`}
+        >
+          {lights[light].color}
+        </div>
+      ))}
 
-      <div
+      {/* <div
         className={
           green
             ? "md:w-24 md:h-24 w-16 h-16 bg-green rounded-full"
@@ -65,7 +69,7 @@ export default function TrafficLight() {
             ? "md:w-24 md:h-24 w-16 h-16 bg-red rounded-full"
             : "md:w-24 md:h-24 w-16 h-16 bg-inactive rounded-full"
         }
-      ></div>
+      ></div> */}
     </div>
   );
 }
